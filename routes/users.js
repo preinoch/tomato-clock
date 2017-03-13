@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var userDao = require('../dao/userDao');
+var model = require("../controller/base-controller");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  userDao.queryAll(req, res, next);
+router.get('/login', function(req, res, next) {
+    res.render('user/login');
 });
 
-router.get('/', function(req, res, next) {
-  res.send('respond with');
+/* GET users listing. */
+router.post('/', function(req, res, next) {
+    model.get(req, res, next);
 });
 
 module.exports = router;
