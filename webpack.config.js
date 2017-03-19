@@ -1,15 +1,32 @@
-var webpack = require('webpack')
+let webpack = require('webpack')
+
 
 module.exports = {
-  entry: './login-entry.js',
+  entry: './resource/asserts/index.js',
   output: {
-    path: __dirname,
-    filename: 'login-bundle.js'
+    path: __dirname + '/resource/public',
+    filename: 'bundle.js'
   },
   module: {
     loaders: [
-      {test: /\.css$/, loader: 'style-loader!css-loader'},
-      {test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=50000&name=[path][name].[ext]'}
+      {test: /\.css$/, loader: 'style-loader!css-loader?modules'},
+      {test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=50000&name=[path][name].[ext]'},
+      {
+        test: /.js?$/, // 文件过滤规则
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015', 'react'] // es2015 处理 ES6 语法，react 处理 jsx 语法
+        }
+      }
     ]
+  },
+  devServer: {
+    proxy: {
+      '/': {
+        target: 'http://localhost:3000',
+        secure: false
+      }
+    }
   }
 }
