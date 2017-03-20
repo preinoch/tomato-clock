@@ -5,8 +5,7 @@ export default class Logo extends Component{
     render () {
         return (
             <div className={style.logo}>
-                <i className="icon-font">&#xe639;</i>
-                <span className={style.logo}>番茄时钟</span>
+                <i className="icon-font">&#xe639;</i><span className={style['logo-text']}>番茄时钟</span>
             </div>
         )
     }

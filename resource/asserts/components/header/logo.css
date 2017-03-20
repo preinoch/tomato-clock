@@ -1,13 +1,8 @@
 .logo {
-    position: absolute;
-    z-index: 9999;
-    top: 70px;
-    left: 10%;
-    display: inline-block;
-    color: #fff;
+    float: left;
+    margin-left: 100px;
+    color: #CC3333;
 }
 .logo-text {
-    position: relative;
-    bottom: 2px;
     font-size: 30px;
 }
