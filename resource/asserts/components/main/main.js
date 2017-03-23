@@ -7,7 +7,7 @@ export default class Main extends Component{
     render () {
         return (
             <div className={style.main}>
-                <Todo/>
+                <Todo name="asdads"/>
                 <Time/>
             </div>
         )

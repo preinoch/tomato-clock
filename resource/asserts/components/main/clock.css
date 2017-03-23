@@ -1,0 +1,35 @@
+.clock {
+    height: 240px;
+    line-height: 240px;
+    overflow: hidden;
+}
+
+.wrap {
+    float: left;
+    position: relative;
+    left: 50%; 
+}
+
+:local(ul) {
+    position: relative;
+    left: -50%; 
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    font-size: 60px;
+}
+
+:local(li) {
+    float: left;
+}
+
+.medium {
+    width: 96;
+    height: 96;
+    padding: 24;
+}
+
+.mediumIcon {
+    width: 48;
+    height: 48;
+}
