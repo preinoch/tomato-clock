@@ -30,7 +30,7 @@ export default class Todo extends Component{
                     </DropDownMenu>
                 </div>
                 <CardActions style={{padding: '0 32px'}}>
-                    <Tasks tasks={[{id: 1, name: "带吧1"},{id: 1, name: "3234"}]}/>
+                    <Tasks tasks={[{id: 1, name: "带吧1"},{id: 2, name: "3234"}]}/>
                 </CardActions>  
             </Card>
         )
