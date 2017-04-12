@@ -3,11 +3,11 @@ const Sequelize = require('sequelize');
 
 module.exports = function(sequelize, DataTypes) {
     return sequelize.define('task', {
-        task_name: {
+        taskName: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        target_time: {
+        targetTime: {
             type: Sequelize.DATE,
             allowNull: false
         },
@@ -15,9 +15,11 @@ module.exports = function(sequelize, DataTypes) {
             type: Sequelize.STRING,
             allowNull: false
         },
-        user_id: {
+        userId: {
             type: Sequelize.INTEGER,
             allowNull: false
         }
+    }, {
+        underscored: false
     });
 }

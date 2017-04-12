@@ -8,14 +8,10 @@ module.exports = function(sequelize, DataTypes) {
             unique: true,
             allowNull: false,
             validate: {
-                notNull: {msg: "用户名不能为空！"},
-                max: {
-                    args: 20,
-                    msg: "用户名长度不得超过20！"
-                },
-                min: {
-                    args: 6,
-                    msg: "用户名长度不得少于6！" 
+                notEmpty: {msg: "用户名不能为空！"},
+                len: {
+                    args: [6, 20],
+                    msg: "用户名长度需要在6～20之间！"
                 }
             }
         },
@@ -23,41 +19,25 @@ module.exports = function(sequelize, DataTypes) {
             type: Sequelize.STRING,
             allowNull: false,
             validate: {
-                notNull: {msg: "密码不能为空！"},
-                max: {
-                    args: 20,
-                    msg: "密码长度不得超过20！"
-                },
-                min: {
-                    args: 6,
-                    msg: "密码长度不得少于6！" 
+                notEmpty: {msg: "密码不能为空！"},
+                len: {
+                    args: [6, 20],
+                    msg: "密码长度需要在6～20之间！"
                 }
             }
         },
-        nick_name: {
+        nickName: {
             type: Sequelize.STRING,
             allowNull: false,
             validate: {
-                notNull: {msg: "昵称不能为空！"},
-                max: {
-                    args: 8,
-                    msg: "昵称长度不得超过20！"
-                },
-                min: {
-                    args: 1,
-                    msg: "用户名长度不得少于1！" 
+                notEmpty: {msg: "昵称不能为空！"},
+                len: {
+                    args: [1, 8],
+                    msg: "昵称长度需要在1～8之间！"
                 }
             }
         }
     });
 }
-
-
-
-
-
-
-
-
 
 

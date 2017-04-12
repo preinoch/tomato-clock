@@ -34,7 +34,6 @@ export default class Clock extends Component{
         });
     };
 
-    
     tick () {
         let time = this.state.tomatoTime;
         

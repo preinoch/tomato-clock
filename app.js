@@ -4,11 +4,24 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
 
 var app = express();
+
+app.use(session({
+    name: 'skey',
+    secret: 'chyingp',  // 用来对session id相关的cookie进行签名
+    store: new FileStore(),  // 本地存储session（文本文件，也可以选择其他store，比如redis的）
+    saveUninitialized: false,  // 是否自动保存未初始化的会话，建议false
+    resave: false,  // 是否每次都重新保存会话，建议false
+    cookie: {
+        maxAge: 100 * 1000  // 有效期，单位是毫秒
+    }
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'resource/public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/user', user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
