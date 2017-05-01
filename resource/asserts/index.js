@@ -5,23 +5,29 @@ import Main from './components/main/main.js'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { createStore } from 'redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import { initialState } from './redux/reducer'
+import { clock } from './redux/reducer'
+import { countDown } from './redux/action'
+import { Provider } from 'react-redux'
 
 injectTapEventPlugin();
 
+let store = createStore(clock)
+
 ReactDom.render(
-    <MuiThemeProvider>
-        <div>
-            <Header/>
-            <Main/>
-        </div>
-    </MuiThemeProvider>,
+    <Provider store={store}>
+        <MuiThemeProvider>
+            <div>
+                <Header/>
+                <Main/>
+            </div>
+        </MuiThemeProvider>
+    </Provider>,
     document.getElementById('app')
 );
 
-const store = createStore(initialState)
 
-console.log(store.getState())
+
+
 
 
 

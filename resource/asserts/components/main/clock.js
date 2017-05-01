@@ -5,18 +5,18 @@ import IconButton from 'material-ui/IconButton';
 import Checkbox from 'material-ui/Checkbox';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import { countDown, resetClock, startClock } from '../../redux/action'
 
 export default class Clock extends Component{
     constructor () {
         super()
         this.state = {
-            buttonType: 1,  //start is 1, stop is 0.
-            tomatoTime: 1500, //25 minutes, 1500 secon
             open: false
         }
     }
 
     handleStartClick () {
+        this.props.handleStartClock();
         this.tick.call(this); //execute immediately
         this.countDown = setInterval(this.tick.bind(this), 1000);
     }
@@ -27,29 +27,21 @@ export default class Clock extends Component{
 
     handleCloseAlert () {
         clearInterval(this.countDown);
-        this.setState({
-            open: false,
-            buttonType: 1,
-            tomatoTime: 1500
-        });
+        this.props.handleResetClock();
+        this.setState({ open: false });
     };
 
     tick () {
-        let time = this.state.tomatoTime;
+        this.props.handleCountDown();
         
-        if( time > 0 ) {
-            time -= 1;
+        if( this.props.tomatoClock === 0 ) {
+            clearInterval(this.countDown);
         }
-         this.setState({
-            buttonType: 0,
-            tomatoTime: time
-        })
     }
 
     getTime () {
         let ul = [];
-        let state = this.state;
-        if( state.buttonType ) {
+        if( !this.props.clockStatus ) {
             return (
                 <ul>
                     <li>25</li>
@@ -58,10 +50,10 @@ export default class Clock extends Component{
                 </ul>
             )
         }
-        let time = this.state.tomatoTime;
+        let time = this.props.tomatoClock;
         let second = time % 60;
         if( second < 10 ) {
-            second += "0";
+            second = "0" + second;
         }
         let minute = Math.floor(time / 60);
         return (
@@ -77,7 +69,7 @@ export default class Clock extends Component{
     render () {
         let button =  [];
         let time = this.getTime();
-        if( this.state.buttonType ) {
+        if( !this.props.clockStatus ) {
             button.push(
                 <IconButton iconClassName="icon-font icon-kaishi" 
                 onClick={this.handleStartClick.bind(this)}
