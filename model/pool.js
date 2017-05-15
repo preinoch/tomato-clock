@@ -15,8 +15,3 @@ let sequelize = new Sequelize(config.database, config.user, config.password, {
 })
 
 module.exports = sequelize;
-
-
-
-
-

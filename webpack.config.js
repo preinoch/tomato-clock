@@ -1,6 +1,5 @@
 let webpack = require('webpack')
 
-
 module.exports = {
   entry: './resource/asserts/index.js',
   output: {
@@ -25,7 +24,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/': {
-        target: 'http://localhost:9999',
+        target: 'http://localhost:3000',  
         secure: false
       }
     }

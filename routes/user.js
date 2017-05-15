@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 let user = require('../controller/user.js');
 
+
+
 router.post('/login', function(req, res, next) {
     user.login(req, res);
 });

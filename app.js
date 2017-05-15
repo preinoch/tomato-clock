@@ -14,12 +14,12 @@ var app = express();
 
 app.use(session({
     name: 'skey',
-    secret: 'chyingp',  // 用来对session id相关的cookie进行签名
+    secret: 'tomato',  // 用来对session id相关的cookie进行签名
     store: new FileStore(),  // 本地存储session（文本文件，也可以选择其他store，比如redis的）
     saveUninitialized: false,  // 是否自动保存未初始化的会话，建议false
     resave: false,  // 是否每次都重新保存会话，建议false
     cookie: {
-        maxAge: 100 * 1000  // 有效期，单位是毫秒
+        maxAge: 60 * 1000  // 有效期，单位是毫秒
     }
 }));
 
@@ -34,7 +34,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'resource/public')));
 
-app.use('/', index);
+// Use the session middleware 
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+ 
+// Access the session as req.session 
+app.get('/', function(req, res, next) {
+  var sess = req.session
+  if (sess.views) {
+    sess.views++
+    sess.code = 10
+    res.setHeader('Content-Type', 'text/html')
+    res.write('<p>views: ' + sess.views + '</p>')
+    res.write('<p>expires in: ' + (sess.cookie.maxAge / 1000) + 's</p>')
+    res.write('<p>code: ' + sess.code + '</p>')
+    res.end()
+  } else {
+    sess.views = 1
+    res.end('welcome to the session demo. refresh!')
+  }
+})
+
+// app.use('/', index);
 app.use('/user', user);
 
 // catch 404 and forward to error handler
