@@ -6,15 +6,12 @@ import TextField from 'material-ui/TextField';
 import {post} from '../../util/request.js';
 import Snackbar from 'material-ui/Snackbar';
 
-
 export default class Login extends Component{
     constructor () {
         super()
         this.state = {
             username:'',
             password:'',
-            passwordConfirm:'',
-            nickName:'',
             modalOpen: false,
             hintOpen: false,
             hintText: ''
@@ -105,46 +102,10 @@ export default class Login extends Component{
 
         return (
             <div className={style.login}>
-                <FlatButton className={style['login-btn']} label="登陆"/>
-                <FlatButton onTouchTap={this.handleModalOpen.bind(this)} label="注册"/>
-                <Dialog
-                title="注册用户"
-                modal={true}
-                open={this.state.modalOpen}
-                actions={modalFooter}
-                contentStyle={{width: "400px"}}
-                > 
-                    <TextField
-                    hintText="用户名"
-                    floatingLabelText="请输入用户名"
-                    value={this.state.username}
-                    onChange={this.handleUsernameChange.bind(this)}
-                    /><br />
-                    <TextField
-                    type="password"
-                    hintText="密码"
-                    floatingLabelText="请输入密码"
-                    value={this.state.password}
-                    onChange={this.handlePasswordChange.bind(this)}
-                    /><br />
-                    <TextField
-                    type="password"
-                    hintText="确认密码"
-                    floatingLabelText="请输入确认密码"
-                    value={this.state.passwordConfirm}
-                    onChange={this.handlePasswordConfirmChange.bind(this)}
-                    /><br />
-                    <TextField
-                    hintText="昵称"
-                    floatingLabelText="请输入昵称"
-                    value={this.state.nickName}
-                    onChange={this.handleNickNameChange.bind(this)}
-                    />
-                </Dialog>
                 <Dialog
                 title="登录"
                 modal={true}
-                open={this.state.modalOpen}
+                open={this.props.modalOpen}
                 actions={modalFooter}
                 contentStyle={{width: "400px"}}
                 > 

@@ -13,4 +13,8 @@ router.post('/register', function(req, res, next) {
     user.register(req, res);
 });
 
+router.post('/isloging', function(req, res, next) {
+    user.isLoging(req, res);
+});
+
 module.exports = router;

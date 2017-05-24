@@ -19,18 +19,17 @@ exports.login = function(req, res) {
         }
     }).then(function(user) {
         if(user) {
-            req.session.regenerate(function(err) {
-                if(err){
-                    res.send(protocol("登录失败", "", 1)); 
-                }else {
-                    req.session.user = requestData.username;
-                    res.send(protocol()); 
-                }                   
-            }); 
+            req.session.user = requestData.username;
+            res.send(protocol()); 
         }else {
             res.send(protocol("账户密码错误", "", 1));  
         }
     }).catch(function(error) {
         res.send(protocol("登录失败", "", 1));                 
     })
+}
+
+exports.isLoging = function(req, res) {
+    let sess = req.session
+    !sess ? protocol("没有session", '', 1) : protocol(`用户名是${sess.username},时间还剩下${sess.cookie.maxAge}`, '', 0)
 }

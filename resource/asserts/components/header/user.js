@@ -5,94 +5,39 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import {post} from '../../util/request.js';
 import Snackbar from 'material-ui/Snackbar';
+import Register from './register.js'
+import Login from './login.js'
 
 
-export default class Login extends Component{
+export default class User extends Component{
     constructor () {
         super()
         this.state = {
-            username:'',
-            password:'',
-            passwordConfirm:'',
-            nickName:'',
-            modalOpen: false,
-            hintOpen: false,
-            hintText: ''
+            loginOpen: false,
+            registerOpen: false,
         }
     }
 
-    handleModalOpen() {
+    handleLoginOpen() {
         this.setState({
-            modalOpen: true
+            loginOpen: true
         })
     }
 
-    handleModalClose() {
+    handleRegisterOpen() {
         this.setState({
-            username:'',
-            password:'',
-            passwordConfirm:'',
-            nickName:'',
-            modalOpen: false
+            registerOpen: true
         })
     }
 
-    handleUsernameChange(e) {
-        this.setState({
-            username: e.target.value
-        })
-    }
-
-    handlePasswordChange(e) {
-        this.setState({
-            password: e.target.value
-        })
-    }
-
-    handlePasswordConfirmChange(e) {
-        this.setState({
-            passwordConfirm: e.target.value
-        })
-    }
-
-    handleNickNameChange(e) {
-        this.setState({
-            nickName: e.target.value
-        })
-    }
-
-    handleRequestClose() {
-        this.setState({
-            hintOpen: false
-        });
-    };
-
-    handleRegisterFetch() {
-        post('/user/register',
-            {
-                username: this.state.username,
-                password: this.state.password,
-                nickName: this.state.nickName
-            }, () => {
-                this.setState({
-                    hintOpen: true,
-                    modalOpen: false,
-                    hintText: "注册成功"
-                });
-            }, () => {
-                this.setState({
-                    hintOpen: true,
-                    hintText: "注册失败"
-                });
-            }
-         )
-    }
-
-    render () {
+    render() {
+        
         return (
             <div className={style.login}>
-                <FlatButton className={style['login-btn']} label="登陆"/>
-                <FlatButton onTouchTap={this.handleModalOpen.bind(this)} label="注册"/>
+                <FlatButton className={style['login-btn']} onTouchTap={this.handleLoginOpen.bind(this)} label="登陆"/>
+                <FlatButton onTouchTap={this.handleRegisterOpen.bind(this)} label="注册"/>
+                <Register modalOpen={this.state.registerOpen}/>
+                <Login modalOpen={this.state.loginOpen}/>
             </div>
         )
     }

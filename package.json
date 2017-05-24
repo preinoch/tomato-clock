@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "supervisor ./bin/www",
-    "rundev": "supervisor ./bin/www"
+    "rundev": "supervisor -i node_modules bin/www"
   },
   "dependencies": {
     "body-parser": "~1.16.0",

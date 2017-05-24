@@ -2,3 +2,4 @@
 config.json
 .vscode
 npm-debug.log
+/sessions
